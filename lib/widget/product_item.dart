@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../screens/product_details.dart';
 
 class ProductItem extends StatelessWidget {
   final String id;
@@ -15,31 +16,40 @@ class ProductItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
-      child: GridTile(
-        child: Image.network(
-          imageUrl,
-          fit: BoxFit.cover,
-        ),
-        footer: GridTileBar(
-          backgroundColor: Colors.black87,
-          leading: IconButton(
-            color: Theme.of(context).accentColor,
-            icon: const Icon(Icons.favorite),
-            onPressed: () {},
-          ),
-          title: Text(
-            title,
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-              fontSize: 12,
+      child: GestureDetector(
+        onTap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => ProductDetails(title: title),
             ),
+          );
+        },
+        child: GridTile(
+          child: Image.network(
+            imageUrl,
+            fit: BoxFit.cover,
           ),
-          trailing: IconButton(
-            color: Theme.of(context).accentColor,
-            icon: const Icon(
-              Icons.shopping_cart,
+          footer: GridTileBar(
+            backgroundColor: Colors.black87,
+            leading: IconButton(
+              color: Theme.of(context).accentColor,
+              icon: const Icon(Icons.favorite),
+              onPressed: () {},
             ),
-            onPressed: () {},
+            title: Text(
+              title,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontSize: 12,
+              ),
+            ),
+            trailing: IconButton(
+              color: Theme.of(context).accentColor,
+              icon: const Icon(
+                Icons.shopping_cart,
+              ),
+              onPressed: () {},
+            ),
           ),
         ),
       ),
